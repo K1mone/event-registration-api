@@ -1,0 +1,59 @@
+### All events
+GET http://localhost:8080/api/events
+
+### One event
+GET http://localhost:8080/api/events/1
+
+### Missing event -> 404
+GET http://localhost:8080/api/events/999
+
+### Search by title (ignoring case)
+GET http://localhost:8080/api/events?title=quiz
+
+### Search with no matches -> []
+GET http://localhost:8080/api/events?title=football
+
+### Optional: title + location filters
+GET http://localhost:8080/api/events?title=workshop&location=room
+
+### Create -> 201, note the returned id
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "title": "Web Design Workshop",
+  "location": "Room 101"
+}
+
+### Update id 4 -> 200
+PUT http://localhost:8080/api/events/4
+Content-Type: application/json
+
+{
+  "title": "React Workshop",
+  "location": "Room 202"
+}
+
+### Delete id 4 -> 204
+DELETE http://localhost:8080/api/events/4
+
+### Update a missing id -> 404
+PUT http://localhost:8080/api/events/999
+Content-Type: application/json
+
+{
+  "title": "Any",
+  "location": "Any"
+}
+
+### Delete a missing id -> 404
+DELETE http://localhost:8080/api/events/999
+
+### Empty title -> 400, nothing is added
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "title": "",
+  "location": "Room 101"
+}
